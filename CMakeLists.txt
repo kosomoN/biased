@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 2.8.9)
 project(survival)
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 set(CMAKE_BUILD_TYPE Debug)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
