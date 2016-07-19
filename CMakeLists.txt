@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.9)
-project(survival)
+project(biased)
 
 set(CMAKE_BUILD_TYPE Debug)
 
@@ -15,10 +15,10 @@ include_directories("src/")
 
 file(GLOB SOURCES "src/*.cpp")
 
-add_executable(survival ${SOURCES})
-target_link_libraries(survival ${OPENGL_LIBRARY})
-target_link_libraries(survival GLEW)
-target_link_libraries(survival glfw)
-target_link_libraries(survival anax)
+add_executable(biased ${SOURCES})
+target_link_libraries(biased ${OPENGL_LIBRARY})
+target_link_libraries(biased GLEW)
+target_link_libraries(biased glfw)
+target_link_libraries(biased anax)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -Wextra")
