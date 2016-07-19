@@ -20,3 +20,5 @@ target_link_libraries(survival ${OPENGL_LIBRARY})
 target_link_libraries(survival GLEW)
 target_link_libraries(survival glfw)
 target_link_libraries(survival anax)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -Wextra")

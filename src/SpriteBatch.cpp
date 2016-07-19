@@ -2,7 +2,6 @@
 
 #include <cmath>
 #include <glm/vec4.hpp>
-#include "Log.h"
 #include "Sprite.h"
 #include "Animation.h"
 
