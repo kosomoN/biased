@@ -10,12 +10,12 @@ Animation::Animation(int col, int row, float speed, glm::vec2 size, glm::vec2 ro
     calcUVs(col, row);
 }
 
-glm::vec4& Animation::render()
+glm::vec4& Animation::render(float delta)
 {
     if (m_loops < m_loopLimit || m_loopLimit == -1) {
         m_uv = UVs[m_frame];
 
-        //m_frame += gSys->pGame->frameDelta * 30 * m_speed;
+        m_frame += delta * m_speed;
 
         if (floor(m_frame) >= UVs.size()) {
             m_frame = 0.0f;

@@ -85,7 +85,7 @@ void SpriteBatch::draw(float x, float y, float width, float height, float u1, fl
 
     //Bottom left
     glm::vec2 p = glm::vec2(x, y);
-    calcPoint(rotPoint, rotation, p, cosTheta, sinTheta);
+    calcPoint(rotPoint, p, cosTheta, sinTheta);
     m_bufferData[m_index++] = p.x;
     m_bufferData[m_index++] = p.y;
 
@@ -99,7 +99,7 @@ void SpriteBatch::draw(float x, float y, float width, float height, float u1, fl
 
     //Bottom right
     p = glm::vec2(x + width, y);
-    calcPoint(rotPoint, rotation, p, cosTheta, sinTheta);
+    calcPoint(rotPoint, p, cosTheta, sinTheta);
     m_bufferData[m_index++] = p.x;
     m_bufferData[m_index++] = p.y;
 
@@ -113,7 +113,7 @@ void SpriteBatch::draw(float x, float y, float width, float height, float u1, fl
 
     //Top left
     p = glm::vec2(x, y + height);
-    calcPoint(rotPoint, rotation, p, cosTheta, sinTheta);
+    calcPoint(rotPoint, p, cosTheta, sinTheta);
     m_bufferData[m_index++] = p.x;
     m_bufferData[m_index++] = p.y;
 
@@ -130,7 +130,7 @@ void SpriteBatch::draw(float x, float y, float width, float height, float u1, fl
 
     //Top left
     p = glm::vec2(x, y + height);
-    calcPoint(rotPoint, rotation, p, cosTheta, sinTheta);
+    calcPoint(rotPoint, p, cosTheta, sinTheta);
     m_bufferData[m_index++] = p.x;
     m_bufferData[m_index++] = p.y;
 
@@ -144,7 +144,7 @@ void SpriteBatch::draw(float x, float y, float width, float height, float u1, fl
 
     //Bottom right
     p = glm::vec2(x + width, y);
-    calcPoint(rotPoint, rotation, p, cosTheta, sinTheta);
+    calcPoint(rotPoint, p, cosTheta, sinTheta);
     m_bufferData[m_index++] = p.x;
     m_bufferData[m_index++] = p.y;
 
@@ -158,7 +158,7 @@ void SpriteBatch::draw(float x, float y, float width, float height, float u1, fl
 
     //Top right
     p = glm::vec2(x + width, y + height);
-    calcPoint(rotPoint, rotation, p, cosTheta, sinTheta);
+    calcPoint(rotPoint, p, cosTheta, sinTheta);
     m_bufferData[m_index++] = p.x;
     m_bufferData[m_index++] = p.y;
 
@@ -256,12 +256,12 @@ void SpriteBatch::drawVertices(const float& x1, const float& y1, const float& x2
     m_bufferData[m_index++] = m_a;
 }
 
-void SpriteBatch::draw(Sprite* pSprite)
+void SpriteBatch::draw(Sprite* pSprite, float delta)
 {
     if (pSprite->m_shouldDraw) {
         glm::vec2 rotPoint = pSprite->m_pos + pSprite->m_rotPointOffset;
         if (pSprite->m_pAnim != nullptr) {
-            glm::vec4 uv = pSprite->m_pAnim->render();
+            glm::vec4 uv = pSprite->m_pAnim->render(delta);
             draw(pSprite->m_pos.x, pSprite->m_pos.y, pSprite->m_width, pSprite->m_height, uv.y, uv.x, uv.w, uv.z, pSprite->m_rotation, rotPoint);
         } else {
             draw(pSprite->m_pos.x, pSprite->m_pos.y, pSprite->m_width, pSprite->m_height, pSprite->m_u1, pSprite->m_v1, pSprite->m_u2, pSprite->m_v2, pSprite->m_rotation, rotPoint);
@@ -269,7 +269,7 @@ void SpriteBatch::draw(Sprite* pSprite)
     }
 }
 
-void SpriteBatch::calcPoint(glm::vec2 rotationPoint, float rot, glm::vec2& point, float cos, float sin)
+void SpriteBatch::calcPoint(glm::vec2 rotationPoint, glm::vec2& point, float cos, float sin)
 {
     point.x -= rotationPoint.x;
     point.y -= rotationPoint.y;

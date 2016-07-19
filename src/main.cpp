@@ -34,21 +34,24 @@ int main()
     Camera camera(1280, 720);
 
     glClearColor(0, 1, 1, 1);
-    glfwSwapInterval(0);
-    double lastTime = glfwGetTime();
-    int nbFrames = 0;
-    while(!glfwWindowShouldClose(windowSys.getWindowPtr())) {
+    glfwSwapInterval(1);
+    double lastFrameTime = glfwGetTime();
+    double lastFpsPrintTime = glfwGetTime();
+    int frameCount = 0;
+    while (!glfwWindowShouldClose(windowSys.getWindowPtr())) {
+        float delta = (float) (glfwGetTime() - lastFrameTime);
+        lastFrameTime = glfwGetTime();
+
         shader.setMatrix(camera.getCombined());
         glClear(GL_COLOR_BUFFER_BIT);
-        renderer.renderSprites(&batch);
+        renderer.renderSprites(&batch, delta);
 
         // Measure frametime
-        double currentTime = glfwGetTime();
-        nbFrames++;
-        if ( currentTime - lastTime >= 1.0 ){
-            Log(INFO, "%f ms/frame", (1000.0 * (currentTime - lastTime)) / nbFrames);
-            nbFrames = 0;
-            lastTime = currentTime;
+        frameCount++;
+        if ( lastFrameTime - lastFpsPrintTime >= 1.0 ){
+            Log(INFO, "%f ms/frame", (1000.0 * (lastFrameTime - lastFpsPrintTime)) / frameCount);
+            frameCount = 0;
+            lastFpsPrintTime = lastFrameTime;
         }
         windowSys.updateWindow();
     }

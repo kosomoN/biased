@@ -12,7 +12,7 @@ public:
     SpriteRenderer() {};
     ~SpriteRenderer();
 
-    void renderSprites(SpriteBatch* sb);
+    void renderSprites(SpriteBatch* sb, float delta);
     void removeSprite(Sprite* pSprite);
     Sprite* addSprite(float width, float height, float u1, float v1, float u2, float v2, GLuint texture);
     Sprite* addSprite(float width, float height, float u1, float v1, float u2, float v2, GLuint texture, bool end);
