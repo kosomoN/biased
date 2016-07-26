@@ -255,15 +255,15 @@ void SpriteBatch::drawVertices(const float& x1, const float& y1, const float& x2
     m_bufferData[m_index++] = m_a;
 }
 
-void SpriteBatch::draw(Sprite* pSprite, float delta)
+void SpriteBatch::draw(Sprite& sprite, glm::vec2 pos, float delta)
 {
-    if (pSprite->m_shouldDraw) {
-        glm::vec2 rotPoint = pSprite->m_pos + pSprite->m_rotPointOffset;
-        if (pSprite->m_pAnim != nullptr) {
-            glm::vec4 uv = pSprite->m_pAnim->render(delta);
-            draw(pSprite->m_pos.x, pSprite->m_pos.y, pSprite->m_width, pSprite->m_height, uv.y, uv.x, uv.w, uv.z, pSprite->m_rotation, rotPoint);
+    if (sprite.m_shouldDraw) {
+        glm::vec2 rotPoint = pos + sprite.m_rotPointOffset;
+        if (sprite.m_pAnim != nullptr) {
+            glm::vec4 uv = sprite.m_pAnim->render(delta);
+            draw(pos.x, pos.y, sprite.m_width, sprite.m_height, uv.y, uv.x, uv.w, uv.z, sprite.m_rotation, rotPoint);
         } else {
-            draw(pSprite->m_pos.x, pSprite->m_pos.y, pSprite->m_width, pSprite->m_height, pSprite->m_u1, pSprite->m_v1, pSprite->m_u2, pSprite->m_v2, pSprite->m_rotation, rotPoint);
+            draw(pos.x, pos.y, sprite.m_width, sprite.m_height, sprite.m_u1, sprite.m_v1, sprite.m_u2, sprite.m_v2, sprite.m_rotation, rotPoint);
         }
     }
 }

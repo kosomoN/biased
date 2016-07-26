@@ -2,8 +2,7 @@
 
 #include <math.h>
 
-Animation::Animation(int col, int row, float speed, glm::vec2 size, glm::vec2 rotPoint) :
-    m_size(size),
+Animation::Animation(int col, int row, float speed, glm::vec2 rotPoint) :
     m_rotPointOffset(rotPoint),
     m_speed(speed)
 {

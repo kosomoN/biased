@@ -6,7 +6,7 @@
 
 class Animation {
 public:
-	Animation(int col, int row, float speed, glm::vec2 size, glm::vec2 rotPoint = glm::vec2(0.5));
+	Animation(int col, int row, float speed, glm::vec2 rotPoint = glm::vec2(0.5));
 
 	glm::vec4& render(float delta);
 	// Loops the animations n times
@@ -15,7 +15,6 @@ public:
 
 	std::vector<glm::vec4> UVs;
 	bool isDone = false;
-	glm::vec2 m_size;
 	glm::vec2 m_rotPointOffset;
 private:
 	void calcUVs(int col, int row);

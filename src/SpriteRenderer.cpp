@@ -1,6 +1,7 @@
 #include "SpriteRenderer.h"
 
 #include <algorithm>
+#include <anax/anax.hpp>
 #include "TextureCache.h"
 
 SpriteRenderer::~SpriteRenderer()
@@ -13,18 +14,18 @@ SpriteRenderer::~SpriteRenderer()
 
 void SpriteRenderer::renderSprites(SpriteBatch* sb, float delta)
 {
-    if (m_sprites.size() > 0) {
-        sb->begin(m_sprites.front()->m_texture);
+    auto entities = getEntities();
+    for (anax::Entity& e : entities) {
+        Position& pos = e.getComponent<Position>();
+        Sprite& sprite = e.getComponent<Sprite>();
+        if (sprite.m_texture != sb->getCurrentTexture())
+            sb->begin(sprite.m_texture);
 
-        for (Sprite* s : m_sprites) {
-            if (s->m_texture != sb->getCurrentTexture())
-                sb->begin(s->m_texture);
-
-            sb->draw(s, delta);
-        }
-
-        sb->end();
+        sb->draw(sprite, pos.vec, delta);
     }
+
+    if (!entities.empty())
+        sb->end();
 }
 
 void SpriteRenderer::removeSprite(Sprite* pSprite)
