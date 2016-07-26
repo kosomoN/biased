@@ -34,6 +34,7 @@ int main()
     glUseProgram(shader.getProgram());
 
     Camera camera(1280, 720);
+    windowSys.resizeListeners.push_back(&camera);
 
     anax::World world;
     anax::Entity entity = world.createEntity();

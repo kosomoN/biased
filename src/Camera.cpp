@@ -22,3 +22,8 @@ void Camera::setPosition(const glm::vec2& pos)
 	m_translation = glm::translate(glm::mat4(1.0f), -m_pos);
 	m_combined = m_projection * m_translation;
 }
+
+void Camera::windowResized(int width, int height)
+{
+    resize(width, height);
+}

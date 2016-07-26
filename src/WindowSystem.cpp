@@ -21,6 +21,9 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
+    WindowSystem* winSys = (WindowSystem*) glfwGetWindowUserPointer(window);
+    for (WinResizeListener* listener : winSys->resizeListeners)
+        listener->windowResized(width, height);
 }
 
 bool WindowSystem::init(int width, int height)
@@ -39,6 +42,7 @@ bool WindowSystem::init(int width, int height)
 		glfwTerminate();
 		return false;
 	}
+    glfwSetWindowUserPointer(m_pWin, this);
 
 	glfwMakeContextCurrent(m_pWin);
 	glfwSetKeyCallback(m_pWin, key_callback);
